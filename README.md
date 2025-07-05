@@ -18,7 +18,7 @@ Selected variant: `TypesScript`
 `cd JLPTrainer`
 `npm install`
 
-As always with my projects, I started with a sketch of what I wanted the app to look like, and labelled components and some basic functionality. As components are absolutely vital in React, the sketch will help with the intial build. 
+As always with my projects, I started with a sketch of what I wanted the app to look like, and labelled components and some basic functionality. As components are absolutely vital in React, the sketch will help with the intial build (apologies for the rushed and messy kanji)
 
 <img src="https://github.com/user-attachments/assets/30625f37-55e3-4c9e-ac17-1281181c2ce2" width=40% height=40%>
 
