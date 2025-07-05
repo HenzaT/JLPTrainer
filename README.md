@@ -14,9 +14,10 @@ I first set up my React project using Vite:
 
 `npm create vite@latest`\
 Selected framework: `React`\
-Selected variant: `TypesScript`\
+Selected variant: `TypeScript`\
 `cd JLPTrainer`\
 `npm install`\
+`npm run dev`
 
 As always with my projects, I started with a sketch of what I wanted the app to look like, and labelled components and some basic functionality. As components are absolutely vital in React, the sketch will help with the intial build (apologies for the rushed and messy kanji)
 
