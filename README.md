@@ -1,4 +1,4 @@
-## JLPTrainer - Japanese language flashcard app for JLPT exam
+# JLPTrainer - Japanese language flashcard app for JLPT exam
 This is a self-directed project. This is a project intended to consolidate my ongoing learning of React.js and TypeScript.
 
 ## Goals
@@ -12,5 +12,4 @@ As I am half Japanese, I am fluent in Japanese but have never taken the Japanese
 ## Process
 I first set up my React project using Vite: 
 
-// bash
-npm create vite@latest
+`npm create vite@latest`
