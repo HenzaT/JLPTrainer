@@ -1,4 +1,4 @@
-# JLPTrainer - Japanese language flashcard app for JLPT exam
+# JLPTrainer - Japanese language flashcard app (for JLPT)
 This is a self-directed project. This is a project intended to consolidate my ongoing learning of React.js and TypeScript.
 
 ## Goals
