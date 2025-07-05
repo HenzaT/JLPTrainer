@@ -1,9 +1,9 @@
-import Card from '../Card/card'
+// import Card from '../Card/card'
 
-export default function CardContainer() {
-  return (
-    <>
-      <Card></Card>
-    </>
-  )
-}
+// export default function CardContainer() {
+//   return (
+//     <>
+//       <Card></Card>
+//     </>
+//   )
+// }

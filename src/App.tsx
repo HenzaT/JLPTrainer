@@ -1,5 +1,5 @@
 import Card from './components/Card/card.tsx'
-import CardContainer from './components/CardContainer/cardContainer.tsx'
+// import CardContainer from './components/CardContainer/cardContainer.tsx'
 import Footer from './components/Footer/footer.tsx'
 import Header from './components/Header/header.tsx'
 import Navbar from './components/Navbar/navbar.tsx'
@@ -10,7 +10,7 @@ function App() {
     <>
       <Header />
       <Navbar />
-      <CardContainer>
+      {/* <CardContainer> */}
         <Card
           kanji = "七"
           kunReading = "なな"
@@ -25,7 +25,7 @@ function App() {
           meanings = "one"
           jlpt = {5}
         />
-      </CardContainer>
+      {/* </CardContainer> */}
       <Footer />
     </>
   )
