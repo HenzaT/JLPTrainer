@@ -1,0 +1,9 @@
+@import "./variable.css";
+
+@import "/src/components/Card/card.css";
+@import "/src/components/Header/header.css";
+@import "/src/components/Navbar/navbar.css";
+
+#root {
+  background: var(--light-blue)
+}

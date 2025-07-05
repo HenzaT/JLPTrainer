@@ -1,0 +1,8 @@
+@import "/src/variable.css";
+
+.kanji-card {
+  border: 1px solid whitesmoke;
+  border-radius: 20px;
+  margin: 20px;
+  width: 20vw;
+}

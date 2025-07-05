@@ -1,0 +1,14 @@
+@import "/src/variable.css";
+
+nav {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid black;
+  width: 20vw;
+  height: calc(100vh - 32px);
+}
+
+.nav-link {
+  font-size: 2rem;
+  margin: auto;
+}
