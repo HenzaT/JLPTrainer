@@ -3,6 +3,14 @@
 .kanji-card {
   border: 1px solid whitesmoke;
   border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin: 20px;
   width: 20vw;
+}
+
+.star-icon {
+  width: 20px;
 }

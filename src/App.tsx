@@ -3,6 +3,7 @@ import Card from './components/Card/card.tsx'
 import Footer from './components/Footer/footer.tsx'
 import Header from './components/Header/header.tsx'
 import Navbar from './components/Navbar/navbar.tsx'
+
 import './App.css'
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           onReading = "シチ"
           meanings = "seven"
           jlpt = {5}
+          learnt = {false}
         />
         <Card
           kanji = "一"
@@ -24,6 +26,7 @@ function App() {
           onReading = "イチ"
           meanings = "one"
           jlpt = {5}
+          learnt = {true}
         />
       {/* </CardContainer> */}
       <Footer />
