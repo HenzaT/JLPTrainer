@@ -1,6 +1,5 @@
-import { useState } from "react"
-import emptyStar from "/src/assets/empty-star.png"
-import filledStar from "/src/assets/empty-star.png"
+import React, { useEffect, useState } from "react"
+import axios from 'axios';
 
 export interface kanjiProps {
   kanji: string
@@ -12,7 +11,7 @@ export interface kanjiProps {
 }
 
 export default function Card(props: kanjiProps) {
-  const { kanji, meanings, onReading, kunReading, jlpt, learnt } = props
+  const { kanji, meanings, onReading, kunReading, jlpt } = props
 
   const [card, setCard] = useState({
     kanji: kanji,
@@ -20,21 +19,27 @@ export default function Card(props: kanjiProps) {
     onReading: onReading,
     kunReading: kunReading,
     jlpt: jlpt,
-    learnt: false
-
   })
 
-  let starIcon = learnt ? filledStar : emptyStar
+  const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  function toggleLearnt() {
-    console.log("hello")
-    setCard(prevCard => {
-      return {
-        ...prevCard,
-        learnt: !prevCard.learnt
-      }
-    })
-  }
+  useEffect(() => {
+    axios
+      .get("https://kanjiapi.dev/v1/kanji/jlpt-5")
+      .then((response) => {
+        setData(response.data)
+        setLoading(false)
+      })
+      .catch((err) => {
+        setError(err.message)
+        setLoading(false)
+      })
+  }, [])
+  
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div className="kanji-card">
@@ -43,11 +48,6 @@ export default function Card(props: kanjiProps) {
       <p>{card.onReading}</p>
       <p>{card.kunReading}</p>
       <p>{card.jlpt}</p>
-      <img
-        onClick={toggleLearnt}
-        src={starIcon}
-        alt="empty star icon"
-        className="star-icon" />
     </div>
   )
 }
