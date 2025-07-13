@@ -23,3 +23,10 @@ As always with my projects, I started with a sketch of what I wanted the app to 
 
 <img src="https://github.com/user-attachments/assets/30625f37-55e3-4c9e-ac17-1281181c2ce2" width=40% height=40%>
 
+
+## Future Additions
+As I am working through a react course, I still need to work out how to:
+- get the kanji data from kanjiapi. I know that I will need to use a react hook like useEffect, but I have not come across it yet in a lesson.
+- render child components within parent components.
+
+
