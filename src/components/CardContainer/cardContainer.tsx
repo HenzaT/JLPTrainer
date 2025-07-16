@@ -1,9 +1,19 @@
-// import Card from '../Card/card'
+import Card from '../Card/card'
 
-// export default function CardContainer() {
-//   return (
-//     <>
-//       <Card></Card>
-//     </>
-//   )
-// }
+export interface kanjiProps {
+  kanji: string
+  // meanings: string
+  // onReading: string
+  // kunReading: string
+  // jlpt: number
+}
+
+export default function CardContainer({ cards }: kanjiProps) {
+  return (
+    <div className="card-container">
+      {cards.map(card => {
+        <Card key={card.id} card={kanji}/>
+      })}
+    </div>
+  )
+}

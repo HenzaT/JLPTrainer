@@ -1,14 +1,4 @@
-import React, { useEffect, useState } from "react"
-import axios from 'axios';
-
-export interface kanjiProps {
-  kanji: string
-  meanings: string
-  onReading: string
-  kunReading: string
-  jlpt: number
-  learnt: boolean
-}
+// import axios from 'axios';
 
 export default function Card(props: kanjiProps) {
   const { kanji, meanings, onReading, kunReading, jlpt } = props
@@ -21,25 +11,25 @@ export default function Card(props: kanjiProps) {
     jlpt: jlpt,
   })
 
-  const [data, setData] = useState([])
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // const [data, setData] = useState([])
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState(null);
 
-  useEffect(() => {
-    axios
-      .get("https://kanjiapi.dev/v1/kanji/jlpt-5")
-      .then((response) => {
-        setData(response.data)
-        setLoading(false)
-      })
-      .catch((err) => {
-        setError(err.message)
-        setLoading(false)
-      })
-  }, [])
-  
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  // useEffect(() => {
+  //   axios
+  //     .get("https://kanjiapi.dev/v1/kanji/jlpt-5")
+  //     .then((response) => {
+  //       setData(response.data)
+  //       setLoading(false)
+  //     })
+  //     .catch((err) => {
+  //       setError(err.message)
+  //       setLoading(false)
+  //     })
+  // }, [])
+
+  // if (loading) return <div>Loading...</div>;
+  // if (error) return <div>Error: {error}</div>;
 
   return (
     <div className="kanji-card">
