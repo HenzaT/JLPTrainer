@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react"
-
-import CardContainer from './components/CardContainer/cardContainer.tsx'
+import Card from './components/Card/card.tsx'
 import Footer from './components/Footer/footer.tsx'
 import Header from './components/Header/header.tsx'
 import Navbar from './components/Navbar/navbar.tsx'
-
 import './App.css'
 
 function App() {
@@ -16,11 +14,17 @@ function App() {
       .then(data => setAllJlptFiveKanji(data))
   }, [])
 
+  const allCards = allJltpFiveKanji.map(character =>
+    <Card kanji={character} />
+  )
+
   return (
     <>
       <Header />
       <Navbar />
-      <CardContainer cards={allJltpFiveKanji} />
+      <main>
+        {allCards}
+      </main>
       <Footer />
     </>
   )

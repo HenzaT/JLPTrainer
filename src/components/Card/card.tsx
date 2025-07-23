@@ -1,14 +1,15 @@
 // import axios from 'axios';
+import { useState } from 'react'
 
 export default function Card(props: kanjiProps) {
-  const { kanji, meanings, onReading, kunReading, jlpt } = props
+  const { kanji } = props
 
   const [card, setCard] = useState({
     kanji: kanji,
-    meanings: meanings,
-    onReading: onReading,
-    kunReading: kunReading,
-    jlpt: jlpt,
+    // meanings: meanings,
+    // onReading: onReading,
+    // kunReading: kunReading,
+    // jlpt: jlpt,
   })
 
   // const [data, setData] = useState([])
@@ -33,11 +34,11 @@ export default function Card(props: kanjiProps) {
 
   return (
     <div className="kanji-card">
-      <p>{card.kanji}</p>
-      <p>{card.meanings}</p>
+      <p>Character: {card.kanji}</p>
+      {/* <p>{card.meanings}</p>
       <p>{card.onReading}</p>
       <p>{card.kunReading}</p>
-      <p>{card.jlpt}</p>
+      <p>{card.jlpt}</p> */}
     </div>
   )
 }
