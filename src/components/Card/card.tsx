@@ -1,44 +1,48 @@
-// import axios from 'axios';
 import { useState } from 'react'
+import emptyStar from '/src/assets/empty-star.png'
+import filledStar from '/src/assets/filled-star.png'
+
+export interface kanjiProps {
+  key: number
+  learnt: boolean
+  kanji: string
+  meanings: string
+  onReading: string
+  kunReading: string
+  strokeCount: number
+  jlpt: number
+}
 
 export default function Card(props: kanjiProps) {
-  const { kanji } = props
+  const { key, learnt, kanji, meanings, onReading, kunReading, strokeCount, jlpt } = props
 
   const [card, setCard] = useState({
+    key: key,
+    learnt: learnt,
     kanji: kanji,
-    // meanings: meanings,
-    // onReading: onReading,
-    // kunReading: kunReading,
-    // jlpt: jlpt,
+    meanings: meanings,
+    onReading: onReading,
+    kunReading: kunReading,
+    strokeCount: strokeCount,
+    jlpt: jlpt,
   })
 
-  // const [data, setData] = useState([])
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(null);
-
-  // useEffect(() => {
-  //   axios
-  //     .get("https://kanjiapi.dev/v1/kanji/jlpt-5")
-  //     .then((response) => {
-  //       setData(response.data)
-  //       setLoading(false)
-  //     })
-  //     .catch((err) => {
-  //       setError(err.message)
-  //       setLoading(false)
-  //     })
-  // }, [])
-
-  // if (loading) return <div>Loading...</div>;
-  // if (error) return <div>Error: {error}</div>;
+  function toggleStar() {
+    setCard(prevCard => ({
+      ...prevCard,
+      learnt: !prevCard.learnt
+    }))
+  }
 
   return (
     <div className="kanji-card">
+      <img onClick={toggleStar} className="star-icon" src={card.learnt ? filledStar : emptyStar} alt="" />
       <p>Character: {card.kanji}</p>
-      {/* <p>{card.meanings}</p>
-      <p>{card.onReading}</p>
-      <p>{card.kunReading}</p>
-      <p>{card.jlpt}</p> */}
+      <p>Meanings: {card.meanings}</p>
+      <p>On-yomi: {card.onReading}</p>
+      <p>Kun-yomi: {card.kunReading}</p>
+      <p>Stroke Count: {card.strokeCount}</p>
+      <p>JLPT: {card.jlpt}</p>
     </div>
   )
 }
