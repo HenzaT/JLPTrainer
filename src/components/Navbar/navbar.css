@@ -8,8 +8,20 @@ nav {
   height: calc(100vh - 32px);
 }
 
+button.nav-link {
+  border: none;
+  width: 100%;
+  height: 40%;
+  background: none;
+}
+
+button.nav-link:hover {
+  background: var(--clay-red);
+}
+
 .nav-link {
   font-size: 2rem;
   margin: auto;
   color: black;
+  cursor: pointer;
 }

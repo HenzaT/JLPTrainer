@@ -7,29 +7,50 @@ import './App.css'
 
 function App() {
   const [allJltpFiveKanji, setAllJlptFiveKanji] = useState([])
-  const [jlptFiveKanjiObj, setJlptFiveKanjiObj] = useState([])
+  const [allJlptFourKanji, setAllJlptFourKanji] = useState([])
+  const [allJlptThreeKanji, setAllJlptThreeKanji] = useState([])
+  const [allJlptTwoKanji, setAllJlptTwoKanji] = useState([])
+  const [allJlptOneKanji, setAllJlptOneKanji] = useState([])
 
-  function allKanji(level: string, setState): void {
+  const [jlptFiveKanjiObj, setJlptFiveKanjiObj] = useState([])
+  const [jlptFourKanjiObj, setJlptFourKanjiObj] = useState([])
+  const [jlptThreeKanjiObj, setJlptThreeKanjiObj] = useState([])
+  const [jlptTwoKanjiObj, setJlptTwoKanjiObj] = useState([])
+  const [jlptOneKanjiObj, setJlptOneKanjiObj] = useState([])
+
+  // function to GET all kanji of a certain jlpt level
+  function allKanji(level: string, setKanjiState): void {
     useEffect(() => {
       fetch(`https://kanjiapi.dev/v1/kanji/${level}`)
         .then(res => res.json())
-        .then(data => setState(data))
+        .then(data => setKanjiState(data))
     }, [])
   }
 
   allKanji('jlpt-5', setAllJlptFiveKanji)
+  allKanji('jlpt-4', setAllJlptFourKanji)
+  allKanji('jlpt-3', setAllJlptThreeKanji)
+  allKanji('jlpt-2', setAllJlptTwoKanji)
+  allKanji('jlpt-1', setAllJlptOneKanji)
 
-  // likewise with this, will need to refactor into a reusable function
-  useEffect(() => {
-    // use Promise.all to wait for all fetch requests to finish, otherwise it only saves last fetch in array.
-    Promise.all(
-      allJltpFiveKanji.map(character =>
-        fetch(`https://kanjiapi.dev/v1/kanji/${character}`).then(res => res.json())
-      )
-    ).then(data => setJlptFiveKanjiObj(data))
-  }, [allJltpFiveKanji])
+  // function to GET specific kanji data from a certain jlpt level
+  function fetchSpecificKanji(stateArray: string[], setKanjiState) {
+    useEffect(() => {
+      Promise.all(
+        stateArray.map(character =>
+          fetch(`https://kanjiapi.dev/v1/kanji/${character}`).then(res => res.json())
+        )
+      ).then(data => setKanjiState(data))
+    }, [stateArray])
+  }
 
-  const kanjiCardElements = jlptFiveKanjiObj.map(character =>
+  fetchSpecificKanji(allJltpFiveKanji, setJlptFiveKanjiObj)
+  fetchSpecificKanji(allJlptFourKanji, setJlptFourKanjiObj)
+  fetchSpecificKanji(allJlptThreeKanji, setJlptThreeKanjiObj)
+  fetchSpecificKanji(allJlptTwoKanji, setJlptTwoKanjiObj)
+  fetchSpecificKanji(allJlptOneKanji, setJlptOneKanjiObj)
+
+  const kanjiCardElements = jlptThreeKanjiObj.map(character =>
     <Card
       learnt={false}
       kanji={character.kanji}
@@ -38,7 +59,7 @@ function App() {
       kunReading={character.kun_readings}
       strokeCount={character.stroke_count}
       jlpt={character.jlpt}
-       />
+    />
   )
 
   return (

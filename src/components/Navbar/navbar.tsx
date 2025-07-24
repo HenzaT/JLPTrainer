@@ -1,12 +1,16 @@
 function Navbar() {
+  function showCards(level) {
+    console.log('hello')
+  }
+
   return (
     <nav>
-      <a href="n5" className="nav-link">N5</a>
-      <a href="n4" className="nav-link">N4</a>
-      <a href="n3" className="nav-link">N3</a>
-      <a href="n2" className="nav-link">N2</a>
-      <a href="n1" className="nav-link">N1</a>
-      <a href="all" className="nav-link">All</a>
+      <button className="nav-link" onClick={showCards()}>N5</button>
+      <button className="nav-link">N4</button>
+      <button className="nav-link">N3</button>
+      <button className="nav-link">N2</button>
+      <button className="nav-link">N1</button>
+      <button className="nav-link">All</button>
     </nav>
   )
 }
