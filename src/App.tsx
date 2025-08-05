@@ -9,6 +9,8 @@ function App() {
   const [allJlptKanji, setAllJlptKanji] = useState<any[]>([])
   const [allJlptFiveKanji, setAllJlptFiveKanji] = useState<{ [key: string]: string[] }>({})
   const [isButtonClicked, setIsButtonClicked] = useState<boolean>(false)
+
+  const [isFlipped, setIsFlipped] = useState<boolean>(false)
   // const [allJlptFourKanji, setAllJlptFourKanji] = useState<{ [key: string]: string[] }>({})
   // const [allJlptThreeKanji, setAllJlptThreeKanji] = useState<{ [key: string]: string[] }>({})
   // const [allJlptTwoKanji, setAllJlptTwoKanji] = useState<{ [key: string]: string[] }>({})
@@ -29,6 +31,19 @@ function App() {
     .catch(error => console.error('Error fetching all kanji:', error))
     console.log('request successful!');
   }, [isButtonClicked])
+
+  // GET specific Kanji details (show route)
+  function requestKanjiDetails(character: string) {
+    fetch(`${apiUrl}/api/show?kanji=${character}`, {
+      'method': 'GET',
+    })
+    .then(res => res.json())
+    .then((data) => {
+      console.log(data)
+    })
+    .catch(error => console.error('Error fetching kanji details:', error))
+    console.log('request successful!');
+  }
 
   // request all Kanji
   // function requestAllKanji(): void {
@@ -84,11 +99,12 @@ function App() {
   // reusable function to display JLPT specific kanji characters
   function jlptSpecificCards(index: number, objKey: string) {
     const specificJlptObj = allJlptKanji[index]
-    const jlptKanjiCards: string[] = specificJlptObj[objKey].map(kanji => {
+    const jlptKanjiCards: string[] = specificJlptObj[objKey].map((kanji: string) => {
       return (
         <Card
-          kanji={kanji}
           key={kanji}
+          kanji={kanji}
+          requestKanjiDetails={() => requestKanjiDetails(kanji)}
         />
       )
     })
@@ -102,8 +118,8 @@ function App() {
         requestN5Kanji={() => requestSpecificKanji(setAllJlptFiveKanji, 4)}
       />
       <div className="main-section">
+        {/* <h1>Choose a JLPT level</h1> */}
         <main className="all-cards">
-          Choose a JLPT level
           {/* {isButtonClicked && allKanjiCards} */}
           {isButtonClicked && jlptSpecificCards(4, 'jlpt-5')}
           {/* {allJlptFourKanji['jlpt-4'] && jlptSpecificCards(allJlptFourKanji, 'jlpt-4')}

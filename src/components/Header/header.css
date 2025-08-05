@@ -7,6 +7,13 @@ header {
   align-items: center;
   border-bottom: 1px solid black;
   background-color: var(--clay-red);
+  position: sticky;
+  top: 0;
+  z-index: 4000;
+}
+
+header > h1 {
+  line-height: 50%;
 }
 
 .buttons {
@@ -14,6 +21,7 @@ header {
   justify-content: center;
   align-items: center;
   gap: 20px;
+  margin-bottom: 20px;
 }
 
 .level-button {
@@ -26,4 +34,9 @@ header {
   color: var(--light-purple);
   cursor: pointer;
   box-shadow: var(--shadow);
+  transition: transform 0.2s ease-in-out;
+}
+
+.level-button:hover {
+  transform: scale(1.05);
 }
