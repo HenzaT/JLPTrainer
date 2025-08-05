@@ -2,7 +2,7 @@
 This is a self-directed project. This is a project intended to consolidate my ongoing learning of React.js and TypeScript.
 
 ## Goals
-As I am half Japanese, I am fluent in Japanese but have never taken the Japanese language exam, the JLPT; it is something I'd like to do in the near future. Whilst working through the Scrimba React course, I had the idea to build a flashcard app to help me revise, as I thought React sounded perfect for it. This app will go through many iterations - features will be continuously integrated as I learn more about the React ecosystem and best practices. 
+As I am half Japanese, I am fluent in Japanese but have never taken the UK Japanese language exam, the JLPT; it is something I'd like to do in the near future. Whilst working through the Scrimba React course, I had the idea to build a flashcard app to help me revise, as I thought React sounded perfect for it. This app will go through many iterations - features will be continuously integrated as I learn more about the React ecosystem and best practices. 
 
 ## Tech Stack
 - React.js
@@ -23,10 +23,20 @@ As always with my projects, I started with a sketch of what I wanted the app to 
 
 <img src="https://github.com/user-attachments/assets/30625f37-55e3-4c9e-ac17-1281181c2ce2" width=40% height=40%>
 
+I first set up my project, thinking about the folder structure in particular. I did this for two reasons: 
+- to help with separation of concerns
+- I knew I would need to make API requests, but the Scrimba course hadn't covered this yet and so I could only work on the structure of the project.
+
+Throughout the course and whilst building the app, I found it difficult to understand how parent components were related to child components (especially how data was passed down and props). As the course progressed however, and after building a tenzies react app, I understood this much better. At first, for example, I attempted to fetch the kanji api data in the Card component (child). The tenzies app and the smaller meme generator app helped me to understand that hooks like useEffect and API calls should be made in the parent component, which in this case is App.tsx. 
+
+## Reflections
+Many people I know who use React have said that it 'clicks' one day and they've never looked back. Although it hasn't clicked for me fully, I'm definitely getting there in some aspects (I particularly like how quickly a barebones app can be built, and how fast it is in terms of performance). I'm still learning about how data is passed down, and how parent/child components interact with each other. Some questions I find myself asking are:
+- Where do I put this function?
+- Should state be in this component?
 
 ## Future Additions
 As I am working through a react course, I still need to work out how to:
-- get the kanji data from kanjiapi. I know that I will need to use a react hook like useEffect, but I have not come across it yet in a lesson.
-- render child components within parent components.
+- render specific sets of cards when the navbar link is clicked
+- general refactoring
 
 
