@@ -1,0 +1,12 @@
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid var(--dark-purple);
+  background-color: var(--clay-red);
+}
+
+footer > a {
+  color: var(--dark-purple);
+}

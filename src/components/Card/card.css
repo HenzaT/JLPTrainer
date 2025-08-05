@@ -1,14 +1,19 @@
 @import "/src/variable.css";
 
 .kanji-card {
-  border: 1px solid whitesmoke;
+  border: 0.5px solid whitesmoke;
   border-radius: 20px;
+  background-color: var(--dark-purple);
+  color: var(--light-purple);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 20px;
   width: 20vw;
+  height: 40vh;
+  font-size: 3rem;
+  box-shadow: var(--shadow);
 }
 
 .star-icon {

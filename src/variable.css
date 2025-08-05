@@ -1,7 +1,15 @@
 :root {
-  --light-purple: #DCD6F7;
   --light-blue: #A6B1E1;
-  --clay-red: #B4869F;
+  --light-purple: #DCD6F7;
+  --clay-red: #ab5b87;
   --red: #985F6F;
-  --dark-purple: #4E4C67;
+  --dark-purple: #2c294b;
+
+  --shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  /* for gradient */
+  --lighter-blue: #bec6e6;
+  --medium-blue: #8998d9;
+  --medium-blue-two: #7989d0;
+  --dark-blue: #6579d5;
+  --darker-blue: #5368c6;
 }

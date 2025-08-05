@@ -1,18 +1,15 @@
-function Navbar() {
-  function showCards(level) {
-    console.log('hello')
-  }
+// function Navbar() {
+//   return (
+//     <nav>
+//       <button className="nav-link">Daily Kanji</button>
+//       <button className="nav-link">All</button>
+//       <button className="nav-link">N5</button>
+//       <button className="nav-link">N4</button>
+//       <button className="nav-link">N3</button>
+//       <button className="nav-link">N2</button>
+//       <button className="nav-link">N1</button>
+//     </nav>
+//   )
+// }
 
-  return (
-    <nav>
-      <button className="nav-link" onClick={showCards()}>N5</button>
-      <button className="nav-link">N4</button>
-      <button className="nav-link">N3</button>
-      <button className="nav-link">N2</button>
-      <button className="nav-link">N1</button>
-      <button className="nav-link">All</button>
-    </nav>
-  )
-}
-
-export default Navbar
+// export default Navbar

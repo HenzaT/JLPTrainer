@@ -1,74 +1,115 @@
-import { useEffect, useState } from "react"
-import Card from './components/Card/card.tsx'
-import Footer from './components/Footer/footer.tsx'
-import Header from './components/Header/header.tsx'
-import Navbar from './components/Navbar/navbar.tsx'
+import { useState, useEffect } from "react"
+import Card from './components/Card/Card.tsx'
+import Footer from './components/Footer/Footer.tsx'
+import Header from './components/Header/Header.tsx'
+// import Navbar from './components/Navbar/navbar.tsx'
 import './App.css'
 
 function App() {
-  const [allJltpFiveKanji, setAllJlptFiveKanji] = useState([])
-  const [allJlptFourKanji, setAllJlptFourKanji] = useState([])
-  const [allJlptThreeKanji, setAllJlptThreeKanji] = useState([])
-  const [allJlptTwoKanji, setAllJlptTwoKanji] = useState([])
-  const [allJlptOneKanji, setAllJlptOneKanji] = useState([])
+  const [allJlptKanji, setAllJlptKanji] = useState<any[]>([])
+  const [allJlptFiveKanji, setAllJlptFiveKanji] = useState<{ [key: string]: string[] }>({})
+  const [isButtonClicked, setIsButtonClicked] = useState<boolean>(false)
+  // const [allJlptFourKanji, setAllJlptFourKanji] = useState<{ [key: string]: string[] }>({})
+  // const [allJlptThreeKanji, setAllJlptThreeKanji] = useState<{ [key: string]: string[] }>({})
+  // const [allJlptTwoKanji, setAllJlptTwoKanji] = useState<{ [key: string]: string[] }>({})
+  // const [allJlptOneKanji, setAllJlptOneKanji] = useState<{ [key: string]: string[] }>({})
 
-  const [jlptFiveKanjiObj, setJlptFiveKanjiObj] = useState([])
-  const [jlptFourKanjiObj, setJlptFourKanjiObj] = useState([])
-  const [jlptThreeKanjiObj, setJlptThreeKanjiObj] = useState([])
-  const [jlptTwoKanjiObj, setJlptTwoKanjiObj] = useState([])
-  const [jlptOneKanjiObj, setJlptOneKanjiObj] = useState([])
+  const apiUrl = "http://localhost:5000"
 
-  // function to GET all kanji of a certain jlpt level
-  function allKanji(level: string, setKanjiState): void {
-    useEffect(() => {
-      fetch(`https://kanjiapi.dev/v1/kanji/${level}`)
-        .then(res => res.json())
-        .then(data => setKanjiState(data))
-    }, [])
+  // fetch all kanji cards on load
+  useEffect(() => {
+    fetch(`${apiUrl}/api/all-kanji`, {
+      'method': 'GET',
+    })
+    .then(res => res.json())
+    .then((data) => {
+      console.log(data)
+      setAllJlptKanji(data)
+    })
+    .catch(error => console.error('Error fetching all kanji:', error))
+    console.log('request successful!');
+  }, [isButtonClicked])
+
+  // request all Kanji
+  // function requestAllKanji(): void {
+  //   fetch(`${apiUrl}/api/all-kanji`, {
+  //     'method': 'GET',
+  //   })
+  //   .then(res => res.json())
+  //   .then((data) => {
+  //     console.log(data)
+  //     setAllJlptKanji(data)
+  //   })
+  //   .catch(error => console.error('Error fetching all kanji:', error))
+  //   console.log('request successful!');
+  // }
+
+
+  // reusable function to fetch JLPT specific kanji
+  // function requestJlptKanji(level: string, setState): void {
+  //   fetch(`${apiUrl}/api/index?level=${level}`, {
+  //     'method': 'GET',
+  //   })
+  //   .then(res => res.json())
+  //   .then((data) => {
+  //     console.log(data)
+  //     setState(data)
+  //   })
+  //   .catch(error => {
+  //     console.error('Error fetching kanji:', error)
+  //   })
+  // }
+
+  function requestSpecificKanji(set, index: number) {
+    if (allJlptKanji) {
+      set(allJlptKanji[index]);
+      setIsButtonClicked(true)
+    }
   }
 
-  allKanji('jlpt-5', setAllJlptFiveKanji)
-  allKanji('jlpt-4', setAllJlptFourKanji)
-  allKanji('jlpt-3', setAllJlptThreeKanji)
-  allKanji('jlpt-2', setAllJlptTwoKanji)
-  allKanji('jlpt-1', setAllJlptOneKanji)
 
-  // function to GET specific kanji data from a certain jlpt level
-  function fetchSpecificKanji(stateArray: string[], setKanjiState) {
-    useEffect(() => {
-      Promise.all(
-        stateArray.map(character =>
-          fetch(`https://kanjiapi.dev/v1/kanji/${character}`).then(res => res.json())
-        )
-      ).then(data => setKanjiState(data))
-    }, [stateArray])
+  // All Kanji Cards
+  // Array > Object > Array
+  // [ { jlpt-1: [ character, character ] }, { jlpt-2: [ character, character ] } ]
+  const allKanjiCards = allJlptKanji.flatMap(kanjiObj => {
+    const kanjiArr: string[] = Object.values(kanjiObj)
+    return kanjiArr.map(kanji => (
+      <Card
+        kanji={kanji}
+        key={kanji}
+      />
+    ))
+  })
+
+  // reusable function to display JLPT specific kanji characters
+  function jlptSpecificCards(index: number, objKey: string) {
+    const specificJlptObj = allJlptKanji[index]
+    const jlptKanjiCards: string[] = specificJlptObj[objKey].map(kanji => {
+      return (
+        <Card
+          kanji={kanji}
+          key={kanji}
+        />
+      )
+    })
+    return jlptKanjiCards
   }
-
-  fetchSpecificKanji(allJltpFiveKanji, setJlptFiveKanjiObj)
-  fetchSpecificKanji(allJlptFourKanji, setJlptFourKanjiObj)
-  fetchSpecificKanji(allJlptThreeKanji, setJlptThreeKanjiObj)
-  fetchSpecificKanji(allJlptTwoKanji, setJlptTwoKanjiObj)
-  fetchSpecificKanji(allJlptOneKanji, setJlptOneKanjiObj)
-
-  const kanjiCardElements = jlptThreeKanjiObj.map(character =>
-    <Card
-      learnt={false}
-      kanji={character.kanji}
-      meanings={character.meanings}
-      onReading={character.on_readings}
-      kunReading={character.kun_readings}
-      strokeCount={character.stroke_count}
-      jlpt={character.jlpt}
-    />
-  )
 
   return (
     <>
-      <Header />
+      <Header
+        // requestAllKanji={() => requestSpecificKanji()}
+        requestN5Kanji={() => requestSpecificKanji(setAllJlptFiveKanji, 4)}
+      />
       <div className="main-section">
-        <Navbar />
         <main className="all-cards">
-          {kanjiCardElements}
+          Choose a JLPT level
+          {/* {isButtonClicked && allKanjiCards} */}
+          {isButtonClicked && jlptSpecificCards(4, 'jlpt-5')}
+          {/* {allJlptFourKanji['jlpt-4'] && jlptSpecificCards(allJlptFourKanji, 'jlpt-4')}
+          {allJlptThreeKanji['jlpt-3'] && jlptSpecificCards(allJlptThreeKanji, 'jlpt-3')}
+          {allJlptTwoKanji['jlpt-2'] && jlptSpecificCards(allJlptTwoKanji, 'jlpt-2')}
+          {allJlptOneKanji['jlpt-1'] && jlptSpecificCards(allJlptOneKanji, 'jlpt-1')} */}
         </main>
       </div>
       <Footer />
