@@ -29,7 +29,66 @@ I first set up my project, thinking about the folder structure in particular. I 
 
 Throughout the course and whilst building the app, I found it difficult to understand how parent components were related to child components (especially how data was passed down and props). As the course progressed however, and after building a tenzies react app, I understood this much better. At first, for example, I attempted to fetch the kanji api data in the Card component (child). The tenzies app and the smaller meme generator app helped me to understand that hooks like useEffect and API calls should be made in the parent component, which in this case is App.tsx. 
 
-This was a much more ambitious project, as the state management was a lot mroe complex than my react weather app. As I wanted the flashcards to flip, I had to think hard about global vs independent state management. I kept running into issues where clicking one card would keep displaying the details of one kanji, regardless of the card that was clicked. This was due to having one global kanjiDetail state, which would only hold one kanji and update it to the one that was clicked. Therefore I had to change it so that it would keep every kanji that was clicked. This also allowed for easy caching if the kanji had already been clicked.
+This was a much more ambitious project, as the state management was a lot more complex than my react weather app. I had to decide whether I wanted all kanji to load at once, or to have it dependent on a button click. I tried the latter, but ran into a few issues regarding state and it became very complicated. I had to make a GET request to get all kanji, save it to state, and then make another GET request if I wanted a specific set of kanji depending on the JLPT level.
+```
+ // request all Kanji
+   function requestAllKanji(): void {
+     fetch(`${apiUrl}/api/all-kanji`, {
+       'method': 'GET',
+     })
+     .then(res => res.json())
+     .then((data) => {
+       console.log(data)
+     setAllJlptKanji(data)
+     })
+    .catch(error => console.error('Error fetching all kanji:', error))
+     console.log('request successful!');
+   }
+```
+
+```
+  // reusable function to fetch JLPT specific kanji
+   function requestJlptKanji(level: string, setState): void {
+     fetch(`${apiUrl}/api/index?level=${level}`, {
+       'method': 'GET',
+     })
+     .then(res => res.json())
+     .then((data) => {
+       console.log(data)
+       setState(data)
+     })
+     .catch(error => {
+       console.error('Error fetching kanji:', error)
+     })
+   }
+```
+
+Instead of this, I went back to my Flask backend and created a new endpoint. It was similar to the index route, however I saved the data as a list of python dictionaries, which returned something like this:
+
+[{…}, {…}, {…}, {…}, {…}]
+
+With each dictionary set out as:
+
+{jlpt-1: [ ]}
+
+I then made a GET request when the app was loaded, and saved the returning data into state. Now, I could just simply manipulate the state to get specific sets of kanji:
+```
+// fetch all kanji cards on load
+  useEffect(() => {
+    fetch(`${apiUrl}/api/all-kanji`, {
+      'method': 'GET',
+    })
+    .then(res => res.json())
+    .then((data) => {
+      console.log(data)
+      setAllJlptKanji(data)
+    })
+    .catch(error => console.error('Error fetching all kanji:', error))
+    console.log('request successful!');
+  }, [])
+```
+
+As I wanted the flashcards to flip, I had to think hard about global vs independent state management. I kept running into issues where clicking one card would keep displaying the details of one kanji, regardless of the card that was clicked. This was due to having one global kanjiDetail state, which would only hold one kanji and update it to the one that was clicked. Therefore I had to change it so that it would keep every kanji that was clicked. This also allowed for easy caching if the kanji had already been clicked.
 ```
 .then((data) => {
   setKanjiDetailsMap(prevKanjiDetailsMap => ({
