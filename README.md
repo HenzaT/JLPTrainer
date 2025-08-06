@@ -29,6 +29,21 @@ I first set up my project, thinking about the folder structure in particular. I 
 
 Throughout the course and whilst building the app, I found it difficult to understand how parent components were related to child components (especially how data was passed down and props). As the course progressed however, and after building a tenzies react app, I understood this much better. At first, for example, I attempted to fetch the kanji api data in the Card component (child). The tenzies app and the smaller meme generator app helped me to understand that hooks like useEffect and API calls should be made in the parent component, which in this case is App.tsx. 
 
+This was a much more ambitious project, as the state management was a lot mroe complex than my react weather app. As I wanted the flashcards to flip, I had to think hard about global vs independent state management. I kept running into issues where clicking one card would keep displaying the details of one kanji, regardless of the card that was clicked. This was due to having one global kanjiDetail state, which would only hold one kanji and update it to the one that was clicked. Therefore I had to change it so that it would keep every kanji that was clicked. This also allowed for easy caching if the kanji had already been clicked.
+```
+.then((data) => {
+  setKanjiDetailsMap(prevKanjiDetailsMap => ({
+    ...prevKanjiDetailsMap,
+    [character]: data
+  }));
+```
+```
+if (kanjiDetailsMap[character]) {
+  setFlippedKanji(character);
+  return;
+}
+```
+
 ## Reflections
 Many people I know who use React have said that it 'clicks' one day and they've never looked back. Although it hasn't clicked for me fully, I'm definitely getting there in some aspects (I particularly like how quickly a barebones app can be built, and how fast it is in terms of performance). I'm still learning about how data is passed down, and how parent/child components interact with each other. Some questions I find myself asking are:
 - Where do I put this function?
